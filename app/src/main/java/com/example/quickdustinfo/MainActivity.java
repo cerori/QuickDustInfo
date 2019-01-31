@@ -1,8 +1,15 @@
 package com.example.quickdustinfo;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.util.Pair;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,8 +20,48 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private TabLayout mTabLayout;
+    private ViewPager mViewPager;
+
+    private ArrayList<Pair<Fragment, String>> mFragmentList;
+
+    private static class MyPageAdapter extends FragmentStatePagerAdapter {
+        private final List<Pair<Fragment, String>> mFragmentList;
+
+        public MyPageAdapter(FragmentManager fm, List<Pair<Fragment, String>> fragmentList) {
+            super(fm);
+            mFragmentList = fragmentList;
+        }
+
+        @Override
+        public Fragment getItem(int i) {
+            return mFragmentList.get(i).first;
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        @Nullable
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentList.get(position).second;
+        }
+    }
+
+    private void setUpViewPager() {
+        mTabLayout = findViewById(R.id.tab_layout);
+        mViewPager = findViewById(R.id.view_pager);
+        loadDbDate();
+        MyPageAdapter adapter = new MyPageAdapter(getSupportFragmentManager(), mFr)
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

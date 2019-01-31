@@ -1,9 +1,9 @@
 package com.example.quickdustinfo.model.dust_meterial;
 
 public class Weather {
-    private java.util.List<List> list;
+    private java.util.List<com.example.quickdustinfo.model.dust_meterial.List> list;
 
-    public java.util.List<List> getList() {
+    public java.util.List<com.example.quickdustinfo.model.dust_meterial.List> getList() {
         return list;
     }
 
